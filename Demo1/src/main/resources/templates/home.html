@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+xmlns="http://www.thymeleaf.org/extras/spring-security"
+xlmns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+
+<head>
+	<title>My First Web Page</title>
+</head>
+
+<body>
+	<h1>Hello World!</h1>
+	<p>Welcome to my first web page!</p>
+
+
+	<p>
+		User: <span sec:authentication="principal.username"></span>
+		<br><br>
+
+		Role(s): <span sec:authentication="principal.authorities"></span>
+	</p>
+	
+	<div sec:authorize="hasRole('MANAGER')">
+			
+		<p>
+			<a th:href="@{/leaders}">Leadership meetings</a>
+		</p>
+
+	</div>
+
+	<div sec:authorize="hasRole('ADMIN')">
+		<p>
+			<a th:href="@{/systems}">Systems Admin meetings</a>
+		</p>	
+	</div>
+	
+	<form action="#" th:action="@{/logout}" method="post">
+		<input type="submit" value="logout">
+	</form>
+
+	
+</body>
+
+</html>
